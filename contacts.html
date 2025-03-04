@@ -286,11 +286,67 @@
         </div>
     </div>
 </section>
+<section>
+    <button class="fixed-button" id="openPopup">Become client now</button>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="popup cid-uE0BLXR0xJ" id="popup">
+        <h2>Contact us</h2>
+        <div class="social-row">
+            <div class="soc-item">
+                <a id="footer-wa" href="#">
+                    <span class="mbr-iconfont display-7 socicon-whatsapp socicon"></span>
+                </a>
+            </div>
+            <div class="soc-item">
+                <a id="footer-viber" href="#">
+                    <span class="mbr-iconfont socicon-viber socicon"></span>
+                </a>
+            </div>
+            <div class="soc-item">
+                <a id="footer-telegram" href="#">
+                    <span class="mbr-iconfont socicon-telegram socicon"></span>
+                </a>
+            </div>
+            <div class="soc-item">
+                <a id="footer-email" href="#">
+                    <span class="mbr-iconfont socicon-mail socicon"></span>
+                </a>
+            </div>
+            <div class="soc-item">
+                <a id="footer-phone" href="#">
+                    <span class="mbr-iconfont mobi-mbri-phone mobi-mbri"></span>
+                </a>
+            </div>
+        </div>
+
+        <button class="close-btn" id="closePopup">Close</button>
+    </div>
+</section>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/smoothscroll/smooth-scroll.js"></script>
 <script src="assets/ytplayer/index.js"></script>
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
 <script src="assets/theme/js/script.js"></script>
+<script>
+    const openPopup = document.getElementById("openPopup");
+    const closePopup = document.getElementById("closePopup");
+    const popup = document.getElementById("popup");
+    const overlay = document.getElementById("overlay");
+    openPopup.addEventListener("click", () => {
+        popup.style.display = "block";
+        overlay.style.display = "block";
+    });
+    closePopup.addEventListener("click", () => {
+        popup.style.display = "none";
+        overlay.style.display = "none";
+    });
+    overlay.addEventListener("click", () => {
+        popup.style.display = "none";
+        overlay.style.display = "none";
+    });
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", async function () {
         try {
