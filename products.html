@@ -227,27 +227,27 @@
         <h2>Contact us</h2>
         <div class="social-row">
             <div class="soc-item">
-                <a id="footer-wa" href="#">
+                <a id="footer-wa3" href="#">
                     <span class="mbr-iconfont display-7 socicon-whatsapp socicon"></span>
                 </a>
             </div>
             <div class="soc-item">
-                <a id="footer-viber" href="#">
+                <a id="footer-viber3" href="#">
                     <span class="mbr-iconfont socicon-viber socicon"></span>
                 </a>
             </div>
             <div class="soc-item">
-                <a id="footer-telegram" href="#">
+                <a id="footer-telegram3" href="#">
                     <span class="mbr-iconfont socicon-telegram socicon"></span>
                 </a>
             </div>
             <div class="soc-item">
-                <a id="footer-email" href="#">
+                <a id="footer-email3" href="#">
                     <span class="mbr-iconfont socicon-mail socicon"></span>
                 </a>
             </div>
             <div class="soc-item">
-                <a id="footer-phone" href="#">
+                <a id="footer-phone3" href="#">
                     <span class="mbr-iconfont mobi-mbri-phone mobi-mbri"></span>
                 </a>
             </div>
@@ -331,10 +331,15 @@
                 document.getElementById("header-viber").href = "viber://chat?number=" + social.viber;
 
                 document.getElementById("footer-telegram").href = "tg://resolve?domain=" + social.telegram;
+                document.getElementById("footer-telegram3").href = "tg://resolve?domain=" + social.telegram;
                 document.getElementById("footer-wa").href = "https://wa.me/" + social.whatsapp;
+                document.getElementById("footer-wa3").href = "https://wa.me/" + social.whatsapp;
                 document.getElementById("footer-viber").href = "viber://chat?number=" + social.viber;
+                document.getElementById("footer-viber3").href = "viber://chat?number=" + social.viber;
                 document.getElementById("footer-email").href = "mailto:" + social.email;
+                document.getElementById("footer-email3").href = "mailto:" + social.email;
                 document.getElementById("footer-phone").href = "tel:" + social.phone;
+                document.getElementById("footer-phone3").href = "tel:" + social.phone;
             }
         } catch (error) {
             console.error("Error fetching menu data:", error);
