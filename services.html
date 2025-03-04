@@ -199,27 +199,27 @@
             <div class="col-12 mt-4">
                 <div class="social-row">
                     <div class="soc-item">
-                        <a id="footer-wa" href="#">
+                        <a class="footer-wa" href="#">
                             <span class="mbr-iconfont display-7 socicon-whatsapp socicon"></span>
                         </a>
                     </div>
                     <div class="soc-item">
-                        <a id="footer-viber" href="#">
+                        <a class="footer-viber" href="#">
                             <span class="mbr-iconfont socicon-viber socicon"></span>
                         </a>
                     </div>
                     <div class="soc-item">
-                        <a id="footer-telegram" href="#">
+                        <a class="footer-telegram" href="#">
                             <span class="mbr-iconfont socicon-telegram socicon"></span>
                         </a>
                     </div>
                     <div class="soc-item">
-                        <a id="footer-email" href="#">
+                        <a class="footer-email" href="#">
                             <span class="mbr-iconfont socicon-mail socicon"></span>
                         </a>
                     </div>
                     <div class="soc-item">
-                        <a id="footer-phone" href="#">
+                        <a class="footer-phone" href="#">
                             <span class="mbr-iconfont mobi-mbri-phone mobi-mbri"></span>
                         </a>
                     </div>
@@ -242,27 +242,27 @@
         <h2>Contact us</h2>
         <div class="social-row">
             <div class="soc-item">
-                <a id="footer-wa3" href="#">
+                <a class="footer-wa" href="#">
                     <span class="mbr-iconfont display-7 socicon-whatsapp socicon"></span>
                 </a>
             </div>
             <div class="soc-item">
-                <a id="footer-viber3" href="#">
+                <a class="footer-viber" href="#">
                     <span class="mbr-iconfont socicon-viber socicon"></span>
                 </a>
             </div>
             <div class="soc-item">
-                <a id="footer-telegram3" href="#">
+                <a class="footer-telegram" href="#">
                     <span class="mbr-iconfont socicon-telegram socicon"></span>
                 </a>
             </div>
             <div class="soc-item">
-                <a id="footer-email3" href="#">
+                <a class="footer-email" href="#">
                     <span class="mbr-iconfont socicon-mail socicon"></span>
                 </a>
             </div>
             <div class="soc-item">
-                <a id="footer-phone3" href="#">
+                <a class="footer-phone" href="#">
                     <span class="mbr-iconfont mobi-mbri-phone mobi-mbri"></span>
                 </a>
             </div>
@@ -277,90 +277,11 @@
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="assets/theme/js/script.js"></script>
+<script src="assets/popup/popup.js"></script>
+<script src="assets/global/global.js"></script>
+<script src="assets/menu/menu.js"></script>
+<script src="assets/social/social.js"></script>
 <script>
-    const openPopup = document.getElementById("openPopup");
-    const closePopup = document.getElementById("closePopup");
-    const popup = document.getElementById("popup");
-    const overlay = document.getElementById("overlay");
-    openPopup.addEventListener("click", () => {
-        popup.style.display = "block";
-        overlay.style.display = "block";
-    });
-    closePopup.addEventListener("click", () => {
-        popup.style.display = "none";
-        overlay.style.display = "none";
-    });
-    overlay.addEventListener("click", () => {
-        popup.style.display = "none";
-        overlay.style.display = "none";
-    });
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", async function () {
-        try {
-            const response = await fetch("https://strapi-production-9858.up.railway.app/api/global?populate=*");
-            const data = await response.json();
-
-            if (data && data.data) {
-                const brand = data.data;
-                document.getElementById("brand-url").href = brand.url;
-                document.getElementById("brand-name").href = brand.url;
-                document.getElementById("brand-name").textContent = brand.name;
-
-                if (brand.logo) {
-                    document.getElementById("brand-logo").src = "https://strapi-production-9858.up.railway.app" + brand.logo.url;
-                }
-
-                document.getElementById("copyright").textContent = `© Copyright 2025 ${brand.name} - All Rights Reserved`;
-            }
-        } catch (error) {
-            console.error("Error fetching brand data:", error);
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", async function () {
-        try {
-            const response = await fetch("https://strapi-production-9858.up.railway.app/api/menu?populate=*");
-            const data = await response.json();
-
-            if (data && data.data) {
-                const menu = data.data;
-                document.getElementById("first").textContent = menu.first;
-                document.getElementById("second").textContent = menu.second;
-                document.getElementById("third").textContent = menu.third;
-                document.getElementById("fourh").textContent = menu.fourth;
-            }
-        } catch (error) {
-            console.error("Error fetching menu data:", error);
-        }
-    });
-    document.addEventListener("DOMContentLoaded", async function () {
-        try {
-            const response = await fetch("https://strapi-production-9858.up.railway.app/api/social");
-            const data = await response.json();
-
-            if (data && data.data) {
-                const social = data.data;
-                document.getElementById("header-telegram").href = "tg://resolve?domain=" + social.telegram;
-                document.getElementById("header-wa").href = "https://wa.me/" + social.whatsapp;
-                document.getElementById("header-viber").href = "viber://chat?number=" + social.viber;
-
-                document.getElementById("footer-telegram").href = "tg://resolve?domain=" + social.telegram;
-                document.getElementById("footer-telegram3").href = "tg://resolve?domain=" + social.telegram;
-                document.getElementById("footer-wa").href = "https://wa.me/" + social.whatsapp;
-                document.getElementById("footer-wa3").href = "https://wa.me/" + social.whatsapp;
-                document.getElementById("footer-viber").href = "viber://chat?number=" + social.viber;
-                document.getElementById("footer-viber3").href = "viber://chat?number=" + social.viber;
-                document.getElementById("footer-email").href = "mailto:" + social.email;
-                document.getElementById("footer-email3").href = "mailto:" + social.email;
-                document.getElementById("footer-phone").href = "tel:" + social.phone;
-                document.getElementById("footer-phone3").href = "tel:" + social.phone;
-            }
-        } catch (error) {
-            console.error("Error fetching menu data:", error);
-        }
-    });
-
     document.addEventListener("DOMContentLoaded", async function () {
         try {
             const response = await fetch("https://strapi-production-9858.up.railway.app/api/work-page?pLevel=5");
@@ -405,14 +326,12 @@
     });
 
     document.addEventListener("DOMContentLoaded", function () {
-        // Map of selectors to their corresponding maps
         const maps = {
             "coverage-selector-local": "local-map",
             "coverage-selector-complex": "complex-map",
             "coverage-selector-design": "design-map"
         };
 
-        // Function to show only the selected map and update active class
         function showMap(selectedId) {
             Object.keys(maps).forEach(selectorId => {
                 const mapId = maps[selectorId];
@@ -429,28 +348,23 @@
             });
         }
 
-        // Function to get query parameter from URL
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
 
-        // Determine initial state based on URL or default to "local"
         const coverageParam = getQueryParam("coverage");
         const initialSelector = coverageParam ? `coverage-selector-${coverageParam}` : "coverage-selector-local";
         showMap(initialSelector);
 
-        // Add click event listeners to each selector
         Object.keys(maps).forEach(selectorId => {
             document.getElementById(selectorId).addEventListener("click", function () {
                 showMap(selectorId);
-                // Update URL without reloading the page
                 const newUrl = `${window.location.pathname}?coverage=${selectorId.split("-").pop()}`;
                 window.history.pushState({path: newUrl}, "", newUrl);
             });
         });
 
-        // Handle back/forward browser navigation
         window.addEventListener("popstate", function () {
             const coverageParam = getQueryParam("coverage");
             const selectorId = coverageParam ? `coverage-selector-${coverageParam}` : "coverage-selector-local";
