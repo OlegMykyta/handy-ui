@@ -5504,3 +5504,12 @@ a {
 #types-container a.active {
     font-weight: bold;
 }
+
+.button-custom{
+    width: 100%;
+    display: block;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #ffb700 !important;
+}
