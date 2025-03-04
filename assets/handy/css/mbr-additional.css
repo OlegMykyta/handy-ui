@@ -5495,3 +5495,12 @@ a {
     padding: 5px 25px;
     border-radius: 40px;
 }
+#types-container a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Make the active link bold */
+#types-container a.active {
+    font-weight: bold;
+}
