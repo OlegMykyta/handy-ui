@@ -25,10 +25,10 @@ jobs:
           npm install uglify-js html-minifier -g
 
           # Minify JavaScript files
-          uglifyjs src/**/*.js -o dist/js/app.min.js --compress --mangle
+          uglifyjs assets/**/*.js -o dist/js/app.min.js --compress --mangle
 
           # Minify HTML files
-          html-minifier src/**/*.html --collapse-whitespace --remove-comments --minify-js true --minify-css true -o dist/
+          html-minifier *.html --collapse-whitespace --remove-comments --minify-js true --minify-css true -o dist/
 
       # Step 5: Replace hardcoded URLs (e.g., localhost) with deployment URLs
       - name: Replace Hardcoded URLs in HTML and JS
