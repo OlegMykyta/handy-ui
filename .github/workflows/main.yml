@@ -1,7 +1,7 @@
-name: Build, Minify, and Deploy to Server
+name: Build, Minify, Replace URLs, and Deploy to Server
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # Manually triggered deployment
 
 jobs:
   build_and_deploy:
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js (we'll need it for the minification tools)
+      # Step 2: Set up Node.js (to run build tools like UglifyJS and HTMLMinifier)
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -28,32 +28,43 @@ jobs:
           # Install required npm packages for minification
           npm install uglify-js html-minifier -g
 
-          # Minify JavaScript files in the 'src' directory
+          # Minify JavaScript files
           uglifyjs src/**/*.js -o dist/js/app.min.js --compress --mangle
 
-          # Minify HTML files in the 'src' directory
+          # Minify HTML files
           html-minifier src/**/*.html --collapse-whitespace --remove-comments --minify-js true --minify-css true -o dist/
 
-      # Step 5: Set up SSH for deployment
-      - name: Set up SSH key
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      # Step 6: Deploy the optimized files to the server
-      - name: Deploy to Server
+      # Step 5: Replace hardcoded URLs (e.g., localhost) with deployment URLs
+      - name: Replace Hardcoded URLs in HTML and JS
         run: |
-          # Deploy optimized files to the Nginx directory
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-            # Navigate to the Nginx serving directory (adjust to your path)
-            cd /var/www/your_project || exit 1
+          API_URL="${{ vars.API_URL }}"  # Get the api URL from the GitHub secret
 
-            # Remove old files in the Nginx directory
-            rm -rf *
+          # Replace hardcoded URLs in HTML files (e.g., localhost -> deploy URL)
+          find dist -name "*.html" -exec sed -i "s|https://strapi-production-9858.up.railway.app|$API_URL|g" {} \;
 
-            # Copy the new minified files from GitHub Actions workspace
-            scp -r /tmp/dist/* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/var/www/your_project/
+          # Replace hardcoded URLs in JS files (e.g., localhost -> deploy URL)
+          find dist/js -name "*.js" -exec sed -i "s|https://strapi-production-9858.up.railway.app|$API_URL|g" {} \;
 
-            # Restart Nginx to serve the new files
-            sudo systemctl restart nginx
+      # # Step 6: Set up SSH for deployment
+      # - name: Set up SSH key
+      #   uses: webfactory/ssh-agent@v0.5.3
+      #   with:
+      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # # Step 7: Deploy the optimized files to the server
+      # - name: Deploy to Server
+      #   run: |
+      #     # Deploy optimized files to the Nginx directory
+      #     ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+      #       # Navigate to the Nginx serving directory (adjust to your path)
+      #       cd /var/www/your_project || exit 1
+
+      #       # Remove old files in the Nginx directory
+      #       rm -rf *
+
+      #       # Copy the new minified files from GitHub Actions workspace
+      #       scp -r /tmp/dist/* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/var/www/your_project/
+
+      #       # Restart Nginx to serve the new files
+      #       sudo systemctl restart nginx
           EOF
