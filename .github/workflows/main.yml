@@ -1,84 +1,33 @@
-name: Build, Minify, Replace URLs, and Deploy to Server
+name: Replace URLs and Pack
 
 on:
-  workflow_dispatch:  # Manually triggered deployment
+  push:
+    branches:
+      - main
 
 jobs:
-  build_and_deploy:
+  replace_and_pack:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      # Step 2: Set up Node.js (to run build tools like UglifyJS and HTMLMinifier)
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      
-      # Step 4: Minify JavaScript and HTML
-      # - name: Minify JavaScript and HTML
-      #   run: |
-      #     # Install required npm packages for minification
-      #     npm install uglify-js html-minifier -g
-          
-      #     # Create the dist/js directory if it doesn't exist
-      #     mkdir -p dist/js
-          
-      #     # Minify JavaScript files located in 'assets/**/*.js' directory
-      #     uglifyjs assets/**/*.js -o dist/js/app.min.js --compress --mangle
-          
-      #     # Minify HTML files located in the root of the repository
-      #     # For each HTML file in the root directory, output minified files to dist/
-      #     for file in *.html; do
-      #       html-minifier "$file" --collapse-whitespace --remove-comments --minify-js true --minify-css true -o "dist/$(basename $file)"
-      #     done
-      
-      # Step 5: Replace hardcoded URLs (e.g., localhost) with deployment URLs
-      - name: Replace Hardcoded URLs in HTML and JS
-        run: |
-          API_URL="${{ vars.API_URL }}"  # Get the api URL from the GitHub secret
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
 
-          # Replace hardcoded URLs in HTML files (e.g., localhost -> deploy URL)
-          find -name "*.html" -exec sed -i "s|https://strapi-production-9858.up.railway.app|$API_URL|g" {} \;
+    - name: Replace URLs
+      run: |
+        find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i "s|http://old-url.com|${{ secrets.API_URL }}|g" {} +
 
-          # Replace hardcoded URLs in JS files (e.g., localhost -> deploy URL)
-          find assets -name "*.js" -exec sed -i "s|https://strapi-production-9858.up.railway.app|$API_URL|g" {} \;
-          sleep 3
+    - name: Pack files
+      run: |
+        tar -czvf archive.tar.gz $(git ls-files)
 
-      - name: Create tar.gz Archive
-        run: |
-          tar -czf archive.tar.gz -C dist $(ls)
-          
-      # Step 7: Upload the archive as an artifact
-      - name: Upload archive as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-archive
-          path: archive.tar.gz
-          
-      # # Step 6: Set up SSH for deployment
-      # - name: Set up SSH key
-      #   uses: webfactory/ssh-agent@v0.5.3
-      #   with:
-      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      # # Step 7: Deploy the optimized files to the server
-      # - name: Deploy to Server
-      #   run: |
-      #     # Deploy optimized files to the Nginx directory
-      #     ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-      #       # Navigate to the Nginx serving directory (adjust to your path)
-      #       cd /var/www/your_project || exit 1
-
-      #       # Remove old files in the Nginx directory
-      #       rm -rf *
-
-      #       # Copy the new minified files from GitHub Actions workspace
-      #       scp -r /tmp/dist/* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/var/www/your_project/
-
-      #       # Restart Nginx to serve the new files
-      #       sudo systemctl restart nginx
-      #    EOF
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: packed-archive
+        path: archive.tar.gz
