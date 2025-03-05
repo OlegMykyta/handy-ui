@@ -46,25 +46,23 @@ jobs:
 
           # Replace hardcoded URLs in JS files (e.g., localhost -> deploy URL)
           find dist/js -name "*.js" -exec sed -i "s|https://strapi-production-9858.up.railway.app|$API_URL|g" {} \;
+          sleep 3
 
       # Step 6: Create a tar.gz archive of the dist directory
       - name: Create tar.gz archive
         run: |
-          # Create a temporary build directory
-          mkdir -p build
-
-          # Copy files from dist/ to build/
-          cp -r dist/* build/
+          find dist -type f -exec stat --format='%Y' {} \; | sort -n | tail -n 1
+          sleep 3
 
           # Create a tar.gz archive of the build directory
-          tar -czf build/archive.tar.gz -C build .
+          tar -czf dist/archive.tar.gz -C dist .
           
       # Step 7: Upload the archive as an artifact
       - name: Upload archive as artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-archive
-          path: build/archive.tar.gz
+          path: dist/archive.tar.gz
           
       # # Step 6: Set up SSH for deployment
       # - name: Set up SSH key
