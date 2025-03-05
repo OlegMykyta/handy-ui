@@ -1,9 +1,7 @@
 name: Replace URLs and Pack
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   replace_and_pack:
