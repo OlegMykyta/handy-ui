@@ -67,4 +67,4 @@ jobs:
 
       #       # Restart Nginx to serve the new files
       #       sudo systemctl restart nginx
-          EOF
+      #    EOF
