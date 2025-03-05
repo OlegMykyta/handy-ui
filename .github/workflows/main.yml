@@ -17,15 +17,21 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '14'
-
     - name: Replace URLs
       run: |
         find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i "s|http://old-url.com|${{ secrets.API_URL }}|g" {} +
 
+    - name: Create dist directory
+      run: mkdir -p dist
+
+    - name: Move files to dist
+      run: |
+        find . -type f \( -name "*.html" -o -name "*.js" \) -exec mv {} dist/ \;
+
     - name: Pack files
       run: |
-        tar -czvf archive.tar.gz $(git ls-files)
-
+        tar -czvf archive.tar.gz -C $(git ls-files)
+        
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
