@@ -24,11 +24,11 @@ jobs:
 
     - name: Move files to dist
       run: |
-        find . -type f \( -name "*.html" -o -name "*.js" \) -exec mv {} dist/ \;
+        rsync -av --progress . dist --exclude .git --exclude dist --exclude .github
 
     - name: Pack files
       run: |
-        tar -czvf archive.tar.gz dist
+        tar -czvf archive.tar.gz -C dist .
         
     - name: Upload artifact
       uses: actions/upload-artifact@v4
