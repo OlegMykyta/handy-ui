@@ -19,22 +19,22 @@ jobs:
           node-version: '18'
       
       # Step 4: Minify JavaScript and HTML
-      - name: Minify JavaScript and HTML
-        run: |
-          # Install required npm packages for minification
-          npm install uglify-js html-minifier -g
+      # - name: Minify JavaScript and HTML
+      #   run: |
+      #     # Install required npm packages for minification
+      #     npm install uglify-js html-minifier -g
           
-          # Create the dist/js directory if it doesn't exist
-          mkdir -p dist/js
+      #     # Create the dist/js directory if it doesn't exist
+      #     mkdir -p dist/js
           
-          # Minify JavaScript files located in 'assets/**/*.js' directory
-          uglifyjs assets/**/*.js -o dist/js/app.min.js --compress --mangle
+      #     # Minify JavaScript files located in 'assets/**/*.js' directory
+      #     uglifyjs assets/**/*.js -o dist/js/app.min.js --compress --mangle
           
-          # Minify HTML files located in the root of the repository
-          # For each HTML file in the root directory, output minified files to dist/
-          for file in *.html; do
-            html-minifier "$file" --collapse-whitespace --remove-comments --minify-js true --minify-css true -o "dist/$(basename $file)"
-          done
+      #     # Minify HTML files located in the root of the repository
+      #     # For each HTML file in the root directory, output minified files to dist/
+      #     for file in *.html; do
+      #       html-minifier "$file" --collapse-whitespace --remove-comments --minify-js true --minify-css true -o "dist/$(basename $file)"
+      #     done
       
       # Step 5: Replace hardcoded URLs (e.g., localhost) with deployment URLs
       - name: Replace Hardcoded URLs in HTML and JS
@@ -42,22 +42,22 @@ jobs:
           API_URL="${{ vars.API_URL }}"  # Get the api URL from the GitHub secret
 
           # Replace hardcoded URLs in HTML files (e.g., localhost -> deploy URL)
-          find dist -name "*.html" -exec sed -i "s|https://strapi-production-9858.up.railway.app|$API_URL|g" {} \;
+          find -name "*.html" -exec sed -i "s|https://strapi-production-9858.up.railway.app|$API_URL|g" {} \;
 
           # Replace hardcoded URLs in JS files (e.g., localhost -> deploy URL)
-          find dist/js -name "*.js" -exec sed -i "s|https://strapi-production-9858.up.railway.app|$API_URL|g" {} \;
+          find assets -name "*.js" -exec sed -i "s|https://strapi-production-9858.up.railway.app|$API_URL|g" {} \;
           sleep 3
 
       - name: Create tar.gz Archive
         run: |
-          tar -czf dist/archive.tar.gz -C dist $(ls dist)
+          tar -czf archive.tar.gz -C dist $(ls)
           
       # Step 7: Upload the archive as an artifact
       - name: Upload archive as artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-archive
-          path: dist/archive.tar.gz
+          path: archive.tar.gz
           
       # # Step 6: Set up SSH for deployment
       # - name: Set up SSH key
