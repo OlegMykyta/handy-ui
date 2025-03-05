@@ -30,12 +30,12 @@ jobs:
           # Minify JavaScript files located in 'assets/**/*.js' directory
           uglifyjs assets/**/*.js -o dist/js/app.min.js --compress --mangle
           
-          # Create dist directory if it doesn't exist for HTML files
-          mkdir -p dist
-          
           # Minify HTML files located in the root of the repository
-          html-minifier *.html --collapse-whitespace --remove-comments --minify-js true --minify-css true -o dist/
-          
+          # For each HTML file in the root directory, output minified files to dist/
+          for file in *.html; do
+            html-minifier "$file" --collapse-whitespace --remove-comments --minify-js true --minify-css true -o "dist/$(basename $file)"
+          done
+      
       # Step 5: Replace hardcoded URLs (e.g., localhost) with deployment URLs
       - name: Replace Hardcoded URLs in HTML and JS
         run: |
