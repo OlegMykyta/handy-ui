@@ -1,7 +1,7 @@
 name: Replace URLs and Pack
 
 on:
-  dispatch_trigger:
+  workflow_dispatch:
 
 jobs:
   replace_and_pack:
