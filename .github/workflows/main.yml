@@ -17,21 +17,21 @@ jobs:
         node-version: '14'
     - name: Replace URLs
       run: |
-        find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i "s|http://old-url.com|${{ secrets.API_URL }}|g" {} +
+        find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i "s|https://strapi-production-9858.up.railway.app|${{ vars.API_URL }}|g" {} +
 
     - name: Create dist directory
       run: mkdir -p dist
 
     - name: Move files to dist
       run: |
-        find . -type f \( -name "*.html" -o -name "*.js" \) -exec mv {} dist/ \;
+        rsync -av --progress . dist --exclude .git --exclude dist --exclude .github
 
     - name: Pack files
       run: |
-        tar -czvf archive.tar.gz -C $(git ls-files)
+        tar -czvf archive.tar.gz -C dist .
         
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: packed-archive
         path: archive.tar.gz
