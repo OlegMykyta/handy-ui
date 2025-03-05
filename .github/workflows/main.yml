@@ -48,21 +48,16 @@ jobs:
           find dist/js -name "*.js" -exec sed -i "s|https://strapi-production-9858.up.railway.app|$API_URL|g" {} \;
           sleep 3
 
-      - name: Ensure Dist Directory is Stable
-        run: |
-          mkdir -p stable_dist  # Create a separate stable directory
-          rsync -av --progress dist/ stable_dist/  # Copy files safely
-  
       - name: Create tar.gz Archive
         run: |
-          tar -czf stable_dist/archive.tar.gz -C stable_dist .
+          tar -czf dist/archive.tar.gz -C dist $(ls dist)
           
       # Step 7: Upload the archive as an artifact
       - name: Upload archive as artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-archive
-          path: stable_dist/archive.tar.gz
+          path: dist/archive.tar.gz
           
       # # Step 6: Set up SSH for deployment
       # - name: Set up SSH key
