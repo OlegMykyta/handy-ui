@@ -17,19 +17,25 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-
+      
       # Step 4: Minify JavaScript and HTML
       - name: Minify JavaScript and HTML
         run: |
           # Install required npm packages for minification
           npm install uglify-js html-minifier -g
-
-          # Minify JavaScript files
+          
+          # Create the dist/js directory if it doesn't exist
+          mkdir -p dist/js
+          
+          # Minify JavaScript files located in 'assets/**/*.js' directory
           uglifyjs assets/**/*.js -o dist/js/app.min.js --compress --mangle
-
-          # Minify HTML files
+          
+          # Create dist directory if it doesn't exist for HTML files
+          mkdir -p dist
+          
+          # Minify HTML files located in the root of the repository
           html-minifier *.html --collapse-whitespace --remove-comments --minify-js true --minify-css true -o dist/
-
+          
       # Step 5: Replace hardcoded URLs (e.g., localhost) with deployment URLs
       - name: Replace Hardcoded URLs in HTML and JS
         run: |
