@@ -55,7 +55,7 @@ jobs:
 
       # Step 7: Upload the archive as an artifact
       - name: Upload archive as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-archive
           path: dist/archive.tar.gz
