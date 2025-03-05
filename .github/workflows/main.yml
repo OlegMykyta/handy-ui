@@ -18,10 +18,6 @@ jobs:
         with:
           node-version: '18'
 
-      # Step 3: Install dependencies (if you have a package.json file)
-      - name: Install dependencies
-        run: npm install
-
       # Step 4: Minify JavaScript and HTML
       - name: Minify JavaScript and HTML
         run: |
