@@ -28,7 +28,7 @@ jobs:
 
     - name: Pack files
       run: |
-        tar -czvf archive.tar.gz -C dist .
+        tar -czvf archive.tar.gz dist
         
     - name: Upload artifact
       uses: actions/upload-artifact@v4
