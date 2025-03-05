@@ -50,17 +50,21 @@ jobs:
       # Step 6: Create a tar.gz archive of the dist directory
       - name: Create tar.gz archive
         run: |
-          # Ensure all files are written before archiving (optional sleep)
-          sleep 10
-          # Create a tar.gz archive of the dist directory
-          tar -czf dist/archive.tar.gz -C dist .
+          # Create a temporary build directory
+          mkdir -p build
 
+          # Copy files from dist/ to build/
+          cp -r dist/* build/
+
+          # Create a tar.gz archive of the build directory
+          tar -czf build/archive.tar.gz -C build .
+          
       # Step 7: Upload the archive as an artifact
       - name: Upload archive as artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-archive
-          path: dist/archive.tar.gz
+          path: build/archive.tar.gz
           
       # # Step 6: Set up SSH for deployment
       # - name: Set up SSH key
