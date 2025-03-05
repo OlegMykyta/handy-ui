@@ -50,6 +50,8 @@ jobs:
       # Step 6: Create a tar.gz archive of the dist directory
       - name: Create tar.gz archive
         run: |
+          # Ensure all files are written before archiving (optional sleep)
+          sleep 2  # Small delay to ensure file writes are complete
           # Create a tar.gz archive of the dist directory
           tar -czf dist/archive.tar.gz -C dist .
 
