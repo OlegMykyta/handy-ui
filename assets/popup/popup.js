@@ -1,18 +1,1 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const openPopup = document.getElementById("openPopup");
-    const closePopup = document.getElementById("closePopup");
-    const popup = document.getElementById("popup");
-    const overlay = document.getElementById("overlay");
-    openPopup.addEventListener("click", () => {
-        popup.style.display = "block";
-        overlay.style.display = "block";
-    });
-    closePopup.addEventListener("click", () => {
-        popup.style.display = "none";
-        overlay.style.display = "none";
-    });
-    overlay.addEventListener("click", () => {
-        popup.style.display = "none";
-        overlay.style.display = "none";
-    });
-});
+document.addEventListener("DOMContentLoaded",()=>{const a=document.getElementById("openPopup"),b=document.getElementById("closePopup"),c=document.getElementById("popup"),d=document.getElementById("overlay");a.addEventListener("click",()=>{c.style.display="block",d.style.display="block"}),b.addEventListener("click",()=>{c.style.display="none",d.style.display="none"}),d.addEventListener("click",()=>{c.style.display="none",d.style.display="none"})});
