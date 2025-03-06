@@ -15,13 +15,19 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '18'
+  
     - name: Replace URLs
       run: |
         find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i "s|http://193.108.58.129|${{ vars.API_URL }}|g" {} +
 
     - name: Create dist directory
       run: mkdir -p dist
-
+   
+    - name: replace js and css files with minified ones
+      uses: nizarmah/auto-minify@v3
+      with:
+        overwrite: true
+    
     - name: Move files to dist
       run: |
         rsync -av --progress . dist --exclude .git --exclude dist --exclude .github
