@@ -73,6 +73,7 @@ jobs:
           find . -type f ! -name 'archive.tar.gz' -delete
           tar -xvzf archive.tar.gz -C /tmp
           ls /tmp
-          rm -rf /usr/share/nginx/html/*
-          mv /tmp/* /usr/share/nginx/html/
+          rm -rf /var/www/html/*
+          mv /tmp/* /var/www/html/
+          sudo systemctl restart nginx
         EOF
