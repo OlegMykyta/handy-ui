@@ -14,7 +14,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '18'
     - name: Replace URLs
       run: |
         find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i "s|https://strapi-production-9858.up.railway.app|${{ vars.API_URL }}|g" {} +
@@ -35,3 +35,44 @@ jobs:
       with:
         name: packed-archive
         path: archive.tar.gz
+  
+  deploy:
+    runs-on: ubuntu-latest
+    needs: replace_and_pack
+    
+    steps:
+    # Download the artifact
+    - name: Download Strapi Build Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: packed-archive
+
+    - name: Verify
+      run: |
+        ls -la
+  
+    # Set up SSH to the server
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        eval $(ssh-agent -s)
+        ssh-add ~/.ssh/id_rsa
+
+    # Copy to the server
+    - name: Copy tarball to server
+      run: |
+        scp -v -o StrictHostKeyChecking=no archive.tar.gz ${{vars.HOST_USERNAME}}@${{vars.HOST_IP}}:~/handy-ui/archive.tar.gz
+
+    # Deploy to the server
+    - name: Deploy to server
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{vars.HOST_USERNAME}}@${{vars.HOST_IP}} << 'EOF'          
+          cd handy-ui || exit 1
+          find . -type f ! -name 'archive.tar.gz' -delete
+          tar -xvzf archive.tar.gz -C /tmp
+          ls /tmp
+          rm -rf /usr/share/nginx/html/*
+          mv /tmp/* /usr/share/nginx/html/
+        EOF
