@@ -50,13 +50,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
                     <li class="nav-item"><a id="first" class="nav-link link text-black text-primary display-4"
-                                            href="index.html">Home</a></li>
+                                            href="/">Home</a></li>
                     <li class="nav-item"><a id="second" class="nav-link link text-black text-primary display-4"
-                                            href="services.html">Services</a></li>
+                                            href="/services">Services</a></li>
                     <li class="nav-item"><a id="third" class="nav-link link text-black text-primary display-4"
-                                            href="works.html">Projects</a></li>
+                                            href="/works">Projects</a></li>
                     <li class="nav-item"><a id="fourh" class="nav-link link text-black text-primary display-4"
-                                            href="contacts.html">Contacts</a></li>
+                                            href="/contacts">Contacts</a></li>
                 </ul>
                 <div class="icons-menu">
                     <a id="header-wa" class="iconfont-wrapper" href="#">
@@ -461,16 +461,16 @@
     });
     document.addEventListener("DOMContentLoaded", async function () {
         try {
-            const response = await fetch("https://strapi-production-9858.up.railway.app/api/home-data?pLevel=5");
+            const response = await fetch("http://193.108.58.129/api/home-data?pLevel=5");
             const data = await response.json();
 
             if (data && data.data) {
                 const block = data.data;
-                document.getElementById("home-first-image").src = "https://strapi-production-9858.up.railway.app" + block.first.image.url;
+                document.getElementById("home-first-image").src = "http://193.108.58.129/" + block.first.image.url;
                 document.getElementById("home-first-title").textContent = block.first.title;
                 document.getElementById("home-first-description").innerHTML = marked.parse(block.first.description);
 
-                document.getElementById("home-second-image").src = "https://strapi-production-9858.up.railway.app" + block.second.image.url;
+                document.getElementById("home-second-image").src = "http://193.108.58.129/" + block.second.image.url;
                 document.getElementById("home-second-title").textContent = block.second.title;
                 document.getElementById("home-second-description").innerHTML = marked.parse(block.second.description);
 
@@ -487,7 +487,7 @@
 								<div class="item features-image col-12 col-md-6 col-lg-3">
 								<div class="item-wrapper">
 								<div class="item-img">
-								<img src=https://strapi-production-9858.up.railway.app${item.image.url} alt="${item.title}">
+								<img src=http://193.108.58.129/${item.image.url} alt="${item.title}">
 								</div>
 								<div class="item-content">
 								<a href="${item.url}" style="color: black;">
@@ -510,9 +510,9 @@
                 if (block.become_client && block.become_client.first_step) {
                     const become_client = block.become_client;
                     document.getElementById("become-client-title").textContent = become_client.title;
-                    document.getElementById("become-client-first-image").src = "https://strapi-production-9858.up.railway.app" + become_client.first_step.image.url;
+                    document.getElementById("become-client-first-image").src = "http://193.108.58.129/" + become_client.first_step.image.url;
                     document.getElementById("become-client-first-text").innerHTML = marked.parse(become_client.first_step.text);
-                    document.getElementById("become-client-second-image").src = "https://strapi-production-9858.up.railway.app" + become_client.second_step.image.url;
+                    document.getElementById("become-client-second-image").src = "http://193.108.58.129/" + become_client.second_step.image.url;
                     document.getElementById("become-client-second-text").innerHTML = marked.parse(become_client.second_step.text);
                 }
 
@@ -525,7 +525,7 @@
 								<div class="item features-without-image col-12 col-lg-4 active">
 						<div class="item-wrapper">
 							<div class="img-wrapper">
-								<img src=https://strapi-production-9858.up.railway.app${item.image.url} alt="${item.title}">
+								<img src=http://193.108.58.129/${item.image.url} alt="${item.title}">
 							</div>
 							<div class="card-box">
 							<a href="${item.url}" style="color: black;">

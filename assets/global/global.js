@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
     try {
-        const response = await fetch("https://strapi-production-9858.up.railway.app/api/global?populate=*");
+        const response = await fetch("http://193.108.58.129/api/global?populate=*");
         const data = await response.json();
 
         if (data && data.data) {
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.getElementById("brand-name").textContent = brand.name;
 
             if (brand.logo) {
-                document.getElementById("brand-logo").src = "https://strapi-production-9858.up.railway.app" + brand.logo.url;
+                document.getElementById("brand-logo").src = "http://193.108.58.129/" + brand.logo.url;
             }
 
             document.getElementById("copyright").textContent = `© Copyright 2025 ${brand.name} - All Rights Reserved`;

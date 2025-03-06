@@ -14,7 +14,7 @@ function updateOG(property, content) {
 
 async function updateTags(property) {
     try {
-        const response = await fetch("https://strapi-production-9858.up.railway.app/api/seo?pLevel=5");
+        const response = await fetch("http://193.108.58.129/api/seo?pLevel=5");
         const data = await response.json();
         if (data && data.data && data.data[property]) {
             const metaHome = data.data[property];
