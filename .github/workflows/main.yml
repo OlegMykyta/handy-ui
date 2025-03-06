@@ -23,10 +23,8 @@ jobs:
     - name: Create dist directory
       run: mkdir -p dist
    
-    - name: replace js and css files with minified ones
-      uses: nizarmah/auto-minify@v3
-      with:
-        overwrite: true
+    - name: replace js html and css files with minified ones
+      uses: dra1ex/minify-action@v1.0.3
     
     - name: Move files to dist
       run: |
