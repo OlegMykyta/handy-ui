@@ -1,16 +1,1 @@
-document.addEventListener("DOMContentLoaded", async function () {
-    try {
-        const response = await fetch("http://193.108.58.129/api/menu?populate=*");
-        const data = await response.json();
-
-        if (data && data.data) {
-            const menu = data.data;
-            document.getElementById("first").textContent = menu.first;
-            document.getElementById("second").textContent = menu.second;
-            document.getElementById("third").textContent = menu.third;
-            document.getElementById("fourh").textContent = menu.fourth;
-        }
-    } catch (error) {
-        console.error("Error fetching menu data:", error);
-    }
-});
+document.addEventListener("DOMContentLoaded",(async function(){try{const t=await fetch("http://193.108.58.129/api/menu?populate=*"),e=await t.json();if(e&&e.data){const t=e.data;document.getElementById("first").textContent=t.first,document.getElementById("second").textContent=t.second,document.getElementById("third").textContent=t.third,document.getElementById("fourh").textContent=t.fourth}}catch(t){console.error("Error fetching menu data:",t)}}));
