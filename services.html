@@ -298,17 +298,17 @@
                 document.getElementById("service-left-title").textContent = info.left.title;
                 document.getElementById("service-left-description").innerHTML = marked.parse(info.left.description);
                 document.getElementById("service-left-href").href = `works?type=${info.left.type.name}`;
-                document.getElementById("service-left-image").src = "http://193.108.58.129/" + info.left.image.url;
+                document.getElementById("service-left-image").src = "http://193.108.58.129" + info.left.image.url;
 
                 document.getElementById("service-middle-title").textContent = info.middle.title;
                 document.getElementById("service-middle-description").innerHTML = marked.parse(info.middle.description);
                 document.getElementById("service-middle-href").href = `works?type=${info.middle.type.name}`
-                document.getElementById("service-middle-image").src = "http://193.108.58.129/" + info.middle.image.url;
+                document.getElementById("service-middle-image").src = "http://193.108.58.129" + info.middle.image.url;
 
                 document.getElementById("service-right-title").textContent = info.right.title;
                 document.getElementById("service-right-description").innerHTML = marked.parse(info.right.description);
                 document.getElementById("service-right-href").href = `works?type=${info.right.type.name}`
-                document.getElementById("service-right-image").src = "http://193.108.58.129/" + info.right.image.url;
+                document.getElementById("service-right-image").src = "http://193.108.58.129" + info.right.image.url;
 
                 if (info.coverage) {
                     const coverage = info.coverage;

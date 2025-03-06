@@ -279,7 +279,7 @@
                         const itemHTML = `
                         <div class="col-12 col-md-6 col-lg-3 item gallery-image">
                         <div class="item-wrapper mb-3 position-relative">
-                        <a href="products?id=${item.documentId}"><img class="w-100" src="http://193.108.58.129/${item.images[0].url}"></a>
+                        <a href="products?id=${item.documentId}"><img class="w-100" src="http://193.108.58.129${item.images[0].url}"></a>
                         <div class="tag">
                         <div class="tag-item red">${item.images.length} pics</div>
                         <div class="tag-item">${item.tag.name}</div>
@@ -325,7 +325,7 @@
                             const itemHTML = `
                             <div class="col-12 col-md-6 col-lg-3 item gallery-image">
                             <div class="item-wrapper mb-3 position-relative">
-                            <a href="products?id=${item.documentId}"><img class="w-100" src="http://193.108.58.129/${item.images[0].url}"></a>
+                            <a href="products?id=${item.documentId}"><img class="w-100" src="http://193.108.58.129${item.images[0].url}"></a>
                             <div class="tag">
                             <div class="tag-item red">${item.images.length} pics</div>
                             <div class="tag-item">${item.tag.name}</div>

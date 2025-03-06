@@ -466,11 +466,11 @@
 
             if (data && data.data) {
                 const block = data.data;
-                document.getElementById("home-first-image").src = "http://193.108.58.129/" + block.first.image.url;
+                document.getElementById("home-first-image").src = "http://193.108.58.129" + block.first.image.url;
                 document.getElementById("home-first-title").textContent = block.first.title;
                 document.getElementById("home-first-description").innerHTML = marked.parse(block.first.description);
 
-                document.getElementById("home-second-image").src = "http://193.108.58.129/" + block.second.image.url;
+                document.getElementById("home-second-image").src = "http://193.108.58.129" + block.second.image.url;
                 document.getElementById("home-second-title").textContent = block.second.title;
                 document.getElementById("home-second-description").innerHTML = marked.parse(block.second.description);
 
@@ -487,7 +487,7 @@
 								<div class="item features-image col-12 col-md-6 col-lg-3">
 								<div class="item-wrapper">
 								<div class="item-img">
-								<img src=http://193.108.58.129/${item.image.url} alt="${item.title}">
+								<img src=http://193.108.58.129${item.image.url} alt="${item.title}">
 								</div>
 								<div class="item-content">
 								<a href="${item.url}" style="color: black;">
@@ -510,9 +510,9 @@
                 if (block.become_client && block.become_client.first_step) {
                     const become_client = block.become_client;
                     document.getElementById("become-client-title").textContent = become_client.title;
-                    document.getElementById("become-client-first-image").src = "http://193.108.58.129/" + become_client.first_step.image.url;
+                    document.getElementById("become-client-first-image").src = "http://193.108.58.129" + become_client.first_step.image.url;
                     document.getElementById("become-client-first-text").innerHTML = marked.parse(become_client.first_step.text);
-                    document.getElementById("become-client-second-image").src = "http://193.108.58.129/" + become_client.second_step.image.url;
+                    document.getElementById("become-client-second-image").src = "http://193.108.58.129" + become_client.second_step.image.url;
                     document.getElementById("become-client-second-text").innerHTML = marked.parse(become_client.second_step.text);
                 }
 
@@ -525,7 +525,7 @@
 								<div class="item features-without-image col-12 col-lg-4 active">
 						<div class="item-wrapper">
 							<div class="img-wrapper">
-								<img src=http://193.108.58.129/${item.image.url} alt="${item.title}">
+								<img src=http://193.108.58.129${item.image.url} alt="${item.title}">
 							</div>
 							<div class="card-box">
 							<a href="${item.url}" style="color: black;">

@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.getElementById("brand-name").textContent = brand.name;
 
             if (brand.logo) {
-                document.getElementById("brand-logo").src = "http://193.108.58.129/" + brand.logo.url;
+                document.getElementById("brand-logo").src = "http://193.108.58.129" + brand.logo.url;
             }
 
             document.getElementById("copyright").textContent = `© Copyright 2025 ${brand.name} - All Rights Reserved`;

@@ -283,7 +283,7 @@
                 document.getElementById("page-title").textContent = info.title;
                 document.getElementById("page-subtitle").textContent = info.subtitle;
                 document.getElementById("page-description").textContent = info.description;
-                document.getElementById("preview-image").style.backgroundImage = `url(http://193.108.58.129/${info.preview.url})`;
+                document.getElementById("preview-image").style.backgroundImage = `url(http://193.108.58.129${info.preview.url})`;
                 updateTagsLocal(info);
                 if (info.images) {
                     const images = info.images;
@@ -296,7 +296,7 @@
                         const itemHTML = `
             <div class="col-12 col-md-6 col-lg-3 item gallery-image">
                 <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uE1e9KZpn4-modal" data-bs-target="#uE1e9KZpn4-modal">
-                    <img class="w-100" src="http://193.108.58.129/${item.url}" data-slide-to=${index} data-bs-slide-to=${index} data-target="#lb-uE1e9KZpn4" data-bs-target="#lb-uE1e9KZpn4">
+                    <img class="w-100" src="http://193.108.58.129${item.url}" data-slide-to=${index} data-bs-slide-to=${index} data-target="#lb-uE1e9KZpn4" data-bs-target="#lb-uE1e9KZpn4">
                     <div class="icon-wrapper">
                         <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
                     </div>
@@ -306,7 +306,7 @@
                         const active = index === 0 ? "active" : "";
                         const carousel = `
                                 <div class="carousel-item ${active}">
-                                    <img class="d-block w-100" src="http://193.108.58.129/${item.url}" >
+                                    <img class="d-block w-100" src="http://193.108.58.129${item.url}" >
                                 </div>
                                 `;
 
