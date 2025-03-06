@@ -17,7 +17,7 @@ jobs:
         node-version: '18'
     - name: Replace URLs
       run: |
-        find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i "s|https://strapi-production-9858.up.railway.app|${{ vars.API_URL }}|g" {} +
+        find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i "s|http://193.108.58.129|${{ vars.API_URL }}|g" {} +
 
     - name: Create dist directory
       run: mkdir -p dist
