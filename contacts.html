@@ -29,11 +29,11 @@
 
 </head>
 <body>
-
+<div class="spinner" id="spinner"></div>
 <section data-bs-version="5.1" class="menu menu3 cid-uE0zbTAeAT" once="menu" id="menu3-0">
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="container">
-            <div class="navbar-brand">
+            <div id="main-img" class="navbar-brand">
                     <span class="navbar-logo">
                         <a id=brand-url href="#">
                             <img id="brand-logo" src="#"
@@ -108,7 +108,8 @@
                                           id="textarea-form"></textarea>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
-                                <button id="send-button" type="submit" class="btn btn-primary display-7">Send message</button>
+                                <button id="send-button" type="submit" class="btn btn-primary display-7">Send message
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -324,30 +325,26 @@
         <button class="close-btn" id="closePopup">Close</button>
     </div>
 </section>
-<script src="assets/bootstrap/js/bootstrap.bundle.min.js" ></script>
-<script src="assets/smoothscroll/smooth-scroll.js" ></script>
-<script src="assets/ytplayer/index.js" ></script>
-<script src="assets/dropdown/js/navbar-dropdown.js" ></script>
-<script src="assets/theme/js/script.js" ></script>
-<script src="assets/popup/popup.js" ></script>
-<script src="assets/global/global.js" ></script>
-<script src="assets/menu/menu.js" ></script>
-<script src="assets/social/social.js" ></script>
-<script src="assets/meta/head.js" ></script>
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/smoothscroll/smooth-scroll.js"></script>
+<script src="assets/ytplayer/index.js"></script>
+<script src="assets/dropdown/js/navbar-dropdown.js"></script>
+<script src="assets/theme/js/script.js"></script>
+<script src="assets/popup/popup.js"></script>
+<script src="assets/global/global.js"></script>
+<script src="assets/menu/menu.js"></script>
+<script src="assets/social/social.js"></script>
+<script src="assets/meta/head.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", async function () {
         await updateTags('contacts');
-    });
-    document.addEventListener("DOMContentLoaded", async function () {
         try {
             const response = await fetch("http://193.108.58.129/api/contact-page?pLevel=5");
             const data = await response.json();
+            await waitLoading();
 
             if (data && data.data) {
                 const info = data.data;
-                console.log(info);
-                console.log(info.design.name);
-                console.log(info.button_name);
                 document.getElementById("contact-title").textContent = info.title;
                 document.getElementById("send-button").textContent = info.button_name;
                 document.getElementById("leave-number").textContent = info.leave_number;

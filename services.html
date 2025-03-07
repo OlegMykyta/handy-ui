@@ -27,16 +27,15 @@
     <link rel="stylesheet" href="assets/handy/css/mbr-additional.css?v=LodxHe" type="text/css">
 
     <style>
-        /* Add styles for active state */
         .active {
             color: #007bff; /* Highlight text color */
             font-weight: bold;
         }
     </style>
-
-
 </head>
 <body>
+<div class="spinner" id="spinner"></div>
+
 <section data-bs-version="5.1" class="menu menu3 cid-uE0zbTAeAT" once="menu" id="menu3-0">
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="container">
@@ -118,7 +117,7 @@
             </div>
             <div class="item features-image col-12 col-md-6 col-lg-4">
                 <div class="item-wrapper">
-                    <div class="item-img">
+                    <div id="main-img" class="item-img">
                         <img id="service-middle-image" src="#">
                     </div>
                     <div class="item-content">
@@ -310,6 +309,7 @@
                 document.getElementById("service-right-href").href = `works?type=${info.right.type.name}`
                 document.getElementById("service-right-image").src = "http://193.108.58.129" + info.right.image.url;
 
+                await waitLoading();
                 if (info.coverage) {
                     const coverage = info.coverage;
                     document.getElementById("coverage-title").textContent = coverage.title;

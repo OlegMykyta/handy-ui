@@ -19,3 +19,36 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.error("Error fetching brand data:", error);
     }
 });
+
+function waitForImagesToLoad(container) {
+    const images = container.querySelectorAll('img');
+
+    const imagePromises = Array.from(images).map(img => {
+        return new Promise((resolve, reject) => {
+            if (img.complete) {
+                resolve();
+            } else {
+                img.addEventListener('load', resolve);
+            }
+        });
+    });
+
+    return Promise.all(imagePromises);
+}
+
+async function waitLoading() {
+
+    const container = document.getElementById("main-img");
+    await waitForImagesToLoad(container);
+
+    waitForImagesToLoad(container).then(() => {
+        const spinner = document.getElementById('spinner');
+        const sections = document.querySelectorAll('section');
+        spinner.style.display = 'none';
+        sections.forEach((section) => {
+            section.style.display = 'block';
+        });
+    }).catch((error) => {
+        console.error('An error occurred while loading images:', error);
+    });
+}

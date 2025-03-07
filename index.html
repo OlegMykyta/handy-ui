@@ -24,6 +24,9 @@
     <title></title>
 </head>
 <body>
+<div class="spinner" id="spinner"></div>
+<section>
+</section>
 <section data-bs-version="5.1" class="menu menu3 cid-uE0zbTAeAT" once="menu" id="menu3-0">
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="container">
@@ -88,8 +91,7 @@
 
                 </div>
             </div>
-            <div class="col-12 col-md-12 col-lg-6 image-wrapper">
-                <img id="home-first-image" class="w-100" src="#">
+            <div id="main-img" class="col-12 col-md-12 col-lg-6 image-wrapper">
             </div>
         </div>
         <div class="row row-reverse justify-content-center">
@@ -444,29 +446,31 @@
         <button class="close-btn" id="closePopup">Close</button>
     </div>
 </section>
-<script src="assets/bootstrap/js/bootstrap.bundle.min.js" ></script>
-<script src="assets/smoothscroll/smooth-scroll.js" ></script>
-<script src="assets/ytplayer/index.js" ></script>
-<script src="assets/dropdown/js/navbar-dropdown.js" ></script>
-<script src="assets/theme/js/script.js" ></script>
-<script src="assets/popup/popup.js" ></script>
-<script src="assets/global/global.js" ></script>
-<script src="assets/menu/menu.js" ></script>
-<script src="assets/social/social.js" ></script>
-<script src="assets/meta/head.js" ></script>
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/menu/menu.js"></script>
+<script src="assets/meta/head.js"></script>
+<script src="assets/social/social.js"></script>
+<script src="assets/smoothscroll/smooth-scroll.js"></script>
+<script src="assets/ytplayer/index.js"></script>
+<script src="assets/dropdown/js/navbar-dropdown.js"></script>
+<script src="assets/theme/js/script.js"></script>
+<script src="assets/popup/popup.js"></script>
+<script src="assets/global/global.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", async function () {
+        const spinner = document.getElementById('spinner');
         await updateTags('home');
-    });
-    document.addEventListener("DOMContentLoaded", async function () {
+        spinner.style.display = 'block';
         try {
             const response = await fetch("http://193.108.58.129/api/home-data?pLevel=5");
             const data = await response.json();
 
             if (data && data.data) {
                 const block = data.data;
-                document.getElementById("home-first-image").src = "http://193.108.58.129" + block.first.image.url;
+
+                const image1 = `<img id="home-first-image" class="w-100" src=http://193.108.58.129${block.first.image.url}>`;
+                document.getElementById("main-img").innerHTML += image1;
                 document.getElementById("home-first-title").textContent = block.first.title;
                 document.getElementById("home-first-description").innerHTML = marked.parse(block.first.description);
 
@@ -474,12 +478,10 @@
                 document.getElementById("home-second-title").textContent = block.second.title;
                 document.getElementById("home-second-description").innerHTML = marked.parse(block.second.description);
 
-
+                await waitLoading();
                 if (block.portfolio && block.portfolio.examples) {
                     const portfolio = block.portfolio;
                     document.getElementById("portfolio-name").textContent = portfolio.title;
-
-
                     const container = document.getElementById("gallery-container");
 
                     portfolio.examples.forEach(item => {
