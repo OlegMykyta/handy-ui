@@ -5475,7 +5475,6 @@ a {
     text-align: center;
 }
 
-/* Dark Background */
 .overlay {
     display: none;
     position: fixed;
@@ -5500,7 +5499,6 @@ a {
     text-decoration: none;
 }
 
-/* Make the active link bold */
 #types-container a.active {
     font-weight: bold;
 }
