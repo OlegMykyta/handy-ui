@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="assets/dropdown/css/style.css">
     <link rel="stylesheet" href="assets/socicon/css/styles.css">
     <link rel="stylesheet" href="assets/theme/css/style.css">
+    <script src="assets/global/global.js" onload="preload()" ></script>
+    <script src="assets/menu/menu.js" onload="populateMenu()" ></script>
     <link rel="preload"
           href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"
           as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -264,12 +266,11 @@
 <script src="assets/playervimeo/vimeo_player.js" ></script>
 <script src="assets/theme/js/script.js" ></script>
 <script src="assets/popup/popup.js" ></script>
-<script src="assets/global/global.js" ></script>
 <script src="assets/social/social.js" ></script>
-<script src="assets/menu/menu.js" ></script>
 <script src="assets/meta/head.js" ></script>
 
 <script>
+    populate()
     document.addEventListener("DOMContentLoaded", async function () {
         const params = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
@@ -277,7 +278,7 @@
 
         let id = params.id;
         try {
-            const response = await fetch(`http://193.108.58.129:1337/api/work-results/${id}?pLevel=10`);
+            const response = await fetch(`http://193.108.58.129/api/work-results/${id}?pLevel=10`);
             const data = await response.json();
 
             if (data && data.data) {
@@ -285,7 +286,7 @@
                 document.getElementById("page-title").textContent = info.title;
                 document.getElementById("page-subtitle").textContent = info.subtitle;
                 document.getElementById("page-description").textContent = info.description;
-                document.getElementById("preview-image").style.backgroundImage = `url(http://193.108.58.129:1337${info.preview.url})`;
+                document.getElementById("preview-image").style.backgroundImage = `url(http://193.108.58.129${info.preview.url})`;
                 updateTagsLocal(info);
                 if (info.images) {
                     const images = info.images;
@@ -298,7 +299,7 @@
                         const itemHTML = `
             <div class="col-12 col-md-6 col-lg-3 item gallery-image">
                 <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uE1e9KZpn4-modal" data-bs-target="#uE1e9KZpn4-modal">
-                    <img class="w-100" src="http://193.108.58.129:1337${item.url}" data-slide-to=${index} data-bs-slide-to=${index} data-target="#lb-uE1e9KZpn4" data-bs-target="#lb-uE1e9KZpn4">
+                    <img class="w-100" src="http://193.108.58.129${item.url}" data-slide-to=${index} data-bs-slide-to=${index} data-target="#lb-uE1e9KZpn4" data-bs-target="#lb-uE1e9KZpn4">
                     <div class="icon-wrapper">
                         <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
                     </div>
@@ -308,7 +309,7 @@
                         const active = index === 0 ? "active" : "";
                         const carousel = `
                                 <div class="carousel-item ${active}">
-                                    <img class="d-block w-100" src="http://193.108.58.129:1337${item.url}" >
+                                    <img class="d-block w-100" src="http://193.108.58.129${item.url}" >
                                 </div>
                                 `;
 

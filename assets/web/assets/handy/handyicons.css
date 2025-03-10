@@ -32,3 +32,9 @@
 .mobi-mbri-arrow-prev:before {
   content: "\e90a";
 }
+.mobi-mbri-search:before {
+  content: "\e970";
+}
+.mobi-mbri-close:before {
+  content: "\e91a";
+}

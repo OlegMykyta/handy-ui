@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
     try {
-        const response = await fetch("http://193.108.58.129:1337/api/social");
+        const response = await fetch("http://193.108.58.129/api/social");
         const data = await response.json();
 
         if (data && data.data) {

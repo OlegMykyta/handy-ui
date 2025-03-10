@@ -1,6 +1,6 @@
-document.addEventListener("DOMContentLoaded", async function () {
+ async function populateMenu() {
     try {
-        const response = await fetch("http://193.108.58.129:1337/api/menu?populate=*");
+        const response = await fetch("http://193.108.58.129/api/menu?populate=*");
         const data = await response.json();
 
         if (data && data.data) {
@@ -13,4 +13,4 @@ document.addEventListener("DOMContentLoaded", async function () {
     } catch (error) {
         console.error("Error fetching menu data:", error);
     }
-});
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="assets/dropdown/css/style.css">
     <link rel="stylesheet" href="assets/socicon/css/styles.css">
     <link rel="stylesheet" href="assets/theme/css/style.css">
+    <script src="assets/global/global.js" onload="preload()" ></script>
+    <script src="assets/menu/menu.js" onload="populateMenu()" ></script>
     <link rel="preload"
           href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"
           as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -97,8 +99,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="item features-image col-12 col-md-6 col-lg-4">
-                <div class="item-wrapper">
+            <div class="item features-image col-12 col-md-6 col-lg-4 animate">
+                <div class="item-wrapper img-round service-box">
                     <div class="item-img">
                         <img id="service-left-image" src="#">
                     </div>
@@ -116,7 +118,7 @@
                 </div>
             </div>
             <div class="item features-image col-12 col-md-6 col-lg-4">
-                <div class="item-wrapper">
+                <div class="item-wrapper img-round service-box">
                     <div id="main-img" class="item-img">
                         <img id="service-middle-image" src="#">
                     </div>
@@ -133,7 +135,7 @@
                 </div>
             </div>
             <div class="item features-image col-12 col-md-6 col-lg-4">
-                <div class="item-wrapper">
+                <div class="item-wrapper img-round service-box">
                     <div class="item-img">
                         <img id="service-right-image" src="#">
                     </div>
@@ -277,18 +279,17 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="assets/theme/js/script.js" ></script>
 <script src="assets/popup/popup.js" ></script>
-<script src="assets/global/global.js" ></script>
-<script src="assets/menu/menu.js" ></script>
 <script src="assets/social/social.js" ></script>
 <script src="assets/meta/head.js" ></script>
 <script>
+    populate();
     document.getElementById("second").style.fontWeight = "bold";
     document.addEventListener("DOMContentLoaded", async function () {
         await updateTags('services');
     });
     document.addEventListener("DOMContentLoaded", async function () {
         try {
-            const response = await fetch("http://193.108.58.129:1337/api/work-page?pLevel=5");
+            const response = await fetch("http://193.108.58.129/api/work-page?pLevel=5");
             const data = await response.json();
 
             if (data && data.data) {
@@ -298,19 +299,18 @@
                 document.getElementById("service-left-title").textContent = info.left.title;
                 document.getElementById("service-left-description").innerHTML = marked.parse(info.left.description);
                 document.getElementById("service-left-href").href = `works?type=${info.left.type.name}`;
-                document.getElementById("service-left-image").src = "http://193.108.58.129:1337" + info.left.image.url;
+                document.getElementById("service-left-image").src = "http://193.108.58.129" + info.left.image.url;
 
                 document.getElementById("service-middle-title").textContent = info.middle.title;
                 document.getElementById("service-middle-description").innerHTML = marked.parse(info.middle.description);
                 document.getElementById("service-middle-href").href = `works?type=${info.middle.type.name}`
-                document.getElementById("service-middle-image").src = "http://193.108.58.129:1337" + info.middle.image.url;
+                document.getElementById("service-middle-image").src = "http://193.108.58.129" + info.middle.image.url;
 
                 document.getElementById("service-right-title").textContent = info.right.title;
                 document.getElementById("service-right-description").innerHTML = marked.parse(info.right.description);
                 document.getElementById("service-right-href").href = `works?type=${info.right.type.name}`
-                document.getElementById("service-right-image").src = "http://193.108.58.129:1337" + info.right.image.url;
+                document.getElementById("service-right-image").src = "http://193.108.58.129" + info.right.image.url;
 
-                await waitLoading();
                 if (info.coverage) {
                     const coverage = info.coverage;
                     document.getElementById("coverage-title").textContent = coverage.title;
