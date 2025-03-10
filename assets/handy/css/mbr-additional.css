@@ -1271,6 +1271,11 @@ a {
     background-color: #ffffff;
 }
 
+.bg-img{
+    background-image: url("/assets/images/108.jpg");
+    min-height: 100vh;
+}
+
 .cid-uE0At77vYR .mbr-fallback-image.disabled {
     display: none;
 }
@@ -1285,6 +1290,30 @@ a {
     top: 0;
 }
 
+.red{
+    background-color: #c09c1a!important;
+}
+.item-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.tag {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    gap: 0;
+    text-transform: uppercase;
+}
+
+.tag-item {
+    padding: 10px 10px;
+    background-color: #7b3030;
+}
 .cid-uE0At77vYR .row-reverse {
     flex-direction: row-reverse;
 }
@@ -1487,7 +1516,18 @@ a {
 .cid-uE0BAMLEpt {
     padding-top: 2rem;
     padding-bottom: 1rem;
-    background-color: #ffffff;
+    background-color: #edefeb;
+}
+
+.top-cl{
+    background: white;
+    border: 1px solid white;
+    transition: border 0.5s linear;
+}
+
+.top-cl:hover{
+    cursor: pointer;
+    border: 1px solid black;
 }
 
 .cid-uE0BAMLEpt .mbr-fallback-image.disabled {
@@ -5452,12 +5492,16 @@ a {
     transform: translateX(-50%);
     background-color: #ffb700;
     color: #000000;
-    border: none;
-    padding: 5px 25px;
-    font-size: 16px;
+    padding: 10px 25px;
+    font-size: 22px;
     cursor: pointer;
     border-radius: 40px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s;
+}
+.fixed-button:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
 }
 
 .popup {
@@ -5507,7 +5551,76 @@ a {
     width: 100%;
     display: block;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 35px;
     padding: 10px;
     background-color: #ffb700 !important;
+}
+
+.button-custom:hover{
+    background: black!important;
+    color: white!important;
+}
+.button-prim{
+    border-radius: 35px;
+    background: black!important;
+    border-color: black!important;
+    width: 100%;
+}
+.button-prim:hover{
+    border-radius: 35px;
+    background: white!important;
+    border-color: black!important;
+    color: black!important;
+}
+.home-first-description{
+    background: white;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.bg-mh{
+    min-height: 500px;
+}
+
+.img-round{
+    border-radius: 10px;
+}
+
+.portf{
+    transition: transform 0.3s ease;
+
+}
+.portf:hover{
+    cursor: pointer;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+
+.service-box{
+    transition: transform 0.3s ease;
+}
+.service-box:hover{
+    transform: scale(1.02);
+}
+
+.animate{
+    opacity: 1;
+    transform: translateZ(0);
+}
+
+.service-box{
+    transition: transform 0.3s ease;
+}
+.service-box:hover{
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+
+.item-hov{
+    transition: transform 0.3s ease;
+}
+
+.item-hov:hover{
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
 }
