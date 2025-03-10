@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="assets/dropdown/css/style.css">
     <link rel="stylesheet" href="assets/socicon/css/styles.css">
     <link rel="stylesheet" href="assets/theme/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
     <link rel="preload"
           href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"
           as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -22,18 +24,65 @@
     <link rel="preload" as="style" href="assets/handy/css/mbr-additional.css?v=vunC60">
     <link rel="stylesheet" href="assets/handy/css/mbr-additional.css?v=vunC60" type="text/css">
     <title></title>
+    <script>
+        async function prel() {
+            try {
+                const response = await fetch("http://193.108.58.129:1337/api/global?populate=*");
+                const data = await response.json();
+
+                if (data && data.data) {
+                    const brand = data.data;
+                    const url = "http://193.108.58.129:1337" + brand.logo.url;
+                    const imgResponse = await fetch(url);
+                    const blob = await imgResponse.blob();
+
+                    const reader = new FileReader();
+                    reader.onloadend = function () {
+                        localStorage.setItem("brand-logo", reader.result);
+                    };
+                    reader.readAsDataURL(blob);
+                    localStorage.setItem("brand-name", brand.name);
+                    localStorage.setItem("brand-url", brand.url);
+                }
+            } catch (error) {
+                console.error("Error fetching brand data:", error);
+            }
+        }
+
+        async function prel2() {
+            try {
+                const response = await fetch("http://193.108.58.129:1337/api/home-data?pLevel=5");
+                const data = await response.json();
+
+                if (data && data.data) {
+                    const block = data.data;
+                    const url = "http://193.108.58.129:1337" + block.first.image.url;
+                    const imgResponse = await fetch(url);
+                    const blob = await imgResponse.blob();
+
+                    const reader = new FileReader();
+                    reader.onloadend = function () {
+                        localStorage.setItem("image-first", reader.result);
+                    };
+                    reader.readAsDataURL(blob);
+                }
+            } catch (error) {
+                console.error("Error fetching brand data:", error);
+            }
+        }
+
+        prel();
+        prel2();
+    </script>
 </head>
 <body>
-<div class="spinner" id="spinner"></div>
-<section>
-</section>
 <section data-bs-version="5.1" class="menu menu3 cid-uE0zbTAeAT" once="menu" id="menu3-0">
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="container">
             <div class="navbar-brand">
 					<span class="navbar-logo">
 						<a id=brand-url href="#">
-							<img id="brand-logo" src="#"
+							<img id="brand-logo" src=""
                                  style="height: 3.5rem;">
 						</a>
 					</span>
@@ -77,23 +126,70 @@
         </div>
     </nav>
 </section>
-
-<section data-bs-version="5.1" class="features38 cid-uE0At77vYR" id="features038-4">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-12 col-lg">
-                <div class="text-wrapper align-left">
+<section data-bs-version="5.1" class="features38 cid-uE0At77vYR bg-img" id="features038-4">
+    <div class="container d-flex align-items-start justify-content-center min-vh-100 pt-5">
+        <div class="row justify-content-center w-100">
+            <div class="col-12 col-md-6 col-lg-6 d-flex align-items-center">
+                <div class="text-wrapper align-left home-first-description pt-4 pb-4">
                     <h1 id="home-first-title" class="mbr-section-title mbr-fonts-style mb-4 display-2">
                         <strong></strong>
                     </h1>
                     <p id="home-first-description" class="mbr-text align-left mbr-fonts-style mb-4 display-7">
                     </p>
-
                 </div>
             </div>
-            <div id="main-img" class="col-12 col-md-12 col-lg-6 image-wrapper">
+            <div class="col-12 col-md-6 col-lg-6 d-flex align-items-center">
+                <div class="text-wrapper home-first-description pt-4">
+                    <div class="col-lg-12 mx-auto mbr-form" data-form-type="formoid">
+                        <form action="https://formspree.io/f/xnnjellp" method="POST" class="mbr-form form-with-styler" enctype="multipart/form-data">
+                            <div class="dragArea row pt-0">
+                                <div class="col-md-6 col-sm-12 form-group mb-3" data-for="first-name-form">
+                                    <input type="text" name="first-name-form" placeholder="First name" required
+                                           class="form-control"
+                                           id="first-name-form">
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-group mb-3" data-for="last-name-form">
+                                    <input type="text" name="last-name-form" placeholder="Last name" required
+                                           class="form-control"
+                                           id="last-name-form">
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-group mb-3" data-for="email">
+                                    <input type="email" name="email" placeholder="E-mail" required class="form-control"
+                                           id="email-form">
+                                </div>
+                                <div class="col-md-6 col-12 form-group mb-3" data-for="phone">
+                                    <input type="tel" name="phone" placeholder="Phone" class="form-control"
+                                           id="phone-form">
+                                </div>
+                                <div class="col-md col-sm-12 form-group mb-3" data-for="address">
+                                    <input type="text" name="address" placeholder="Address" required
+                                           class="form-control"
+                                           id="address">
+                                </div>
+                                <div class="col-12 form-group mb-3" data-for="textarea">
+                                <textarea name="message" placeholder="Describe your issue" required class="form-control"
+                                          id="textarea-form"></textarea>
+                                </div>
+                                <div class="col-md-6 col-12 form-group mb-3" data-for="file">
+                                    <input type="file" placeholder="File" class="form-control" name="attachment" accept="image/png, image/jpeg"
+                                           id="file">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
+                                    <button id="send-button" type="submit"
+                                            class="btn btn-primary display-7 button-prim">Send message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="features38 cid-uE0At77vYR" id="features038-5">
+    <div class="container">
         <div class="row row-reverse justify-content-center">
 
             <div class="col-12 col-md-12 col-lg">
@@ -109,10 +205,8 @@
                 <img id="home-second-image" class="w-100" src="#">
             </div>
         </div>
-
     </div>
 </section>
-
 <section data-bs-version="5.1" class="features6 start cid-uE0Aw8RFMw" id="features06-5">
 
 
@@ -455,30 +549,64 @@
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
 <script src="assets/theme/js/script.js"></script>
 <script src="assets/popup/popup.js"></script>
-<script src="assets/global/global.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
+    window.addEventListener("load", function() {
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#000"
+                },
+                "button": {
+                    "background": "#f1d600"
+                }
+            },
+            "theme": "classic",
+            "content": {
+                "message": "This website uses cookies to ensure you get the best experience.",
+                "dismiss": "Got it!",
+                "link": "Learn more",
+                "href": "/privacy-policy"
+            }
+        });
+    });
+</script>
+<script>
+    const logo = localStorage.getItem("brand-logo");
+    const name = localStorage.getItem("brand-name");
+    const url = localStorage.getItem("brand-url");
+    const imageFirst = localStorage.getItem("image-first");
+
+    document.getElementById("brand-url").href = url;
+    document.getElementById("brand-name").href = url;
+    document.getElementById("brand-name").textContent = name;
+
+    if (logo) {
+        document.getElementById("brand-logo").src = logo;
+    }
+    if (imageFirst) {
+        document.getElementById("home-first-image").src = imageFirst;
+    }
+    document.getElementById("copyright").textContent = `© Copyright 2025 ${name} - All Rights Reserved`;
+</script>
+<script>
     document.addEventListener("DOMContentLoaded", async function () {
-        const spinner = document.getElementById('spinner');
         await updateTags('home');
-        spinner.style.display = 'block';
         try {
-            const response = await fetch("http://193.108.58.129/api/home-data?pLevel=5");
+            const response = await fetch("http://193.108.58.129:1337/api/home-data?pLevel=5");
             const data = await response.json();
 
             if (data && data.data) {
                 const block = data.data;
 
-                const image1 = `<img id="home-first-image" class="w-100" src=http://193.108.58.129${block.first.image.url}>`;
-                document.getElementById("main-img").innerHTML += image1;
                 document.getElementById("home-first-title").textContent = block.first.title;
                 document.getElementById("home-first-description").innerHTML = marked.parse(block.first.description);
 
-                document.getElementById("home-second-image").src = "http://193.108.58.129" + block.second.image.url;
+                document.getElementById("home-second-image").src = "http://193.108.58.129:1337" + block.second.image.url;
                 document.getElementById("home-second-title").textContent = block.second.title;
                 document.getElementById("home-second-description").innerHTML = marked.parse(block.second.description);
 
-                await waitLoading();
+                // await waitLoading();
                 if (block.portfolio && block.portfolio.examples) {
                     const portfolio = block.portfolio;
                     document.getElementById("portfolio-name").textContent = portfolio.title;
@@ -489,7 +617,7 @@
 								<div class="item features-image col-12 col-md-6 col-lg-3">
 								<div class="item-wrapper">
 								<div class="item-img">
-								<img src=http://193.108.58.129${item.image.url} alt="${item.title}">
+								<img src=http://193.108.58.129:1337${item.image.url} alt="${item.title}">
 								</div>
 								<div class="item-content">
 								<a href="${item.url}" style="color: black;">
@@ -512,9 +640,9 @@
                 if (block.become_client && block.become_client.first_step) {
                     const become_client = block.become_client;
                     document.getElementById("become-client-title").textContent = become_client.title;
-                    document.getElementById("become-client-first-image").src = "http://193.108.58.129" + become_client.first_step.image.url;
+                    document.getElementById("become-client-first-image").src = "http://193.108.58.129:1337" + become_client.first_step.image.url;
                     document.getElementById("become-client-first-text").innerHTML = marked.parse(become_client.first_step.text);
-                    document.getElementById("become-client-second-image").src = "http://193.108.58.129" + become_client.second_step.image.url;
+                    document.getElementById("become-client-second-image").src = "http://193.108.58.129:1337" + become_client.second_step.image.url;
                     document.getElementById("become-client-second-text").innerHTML = marked.parse(become_client.second_step.text);
                 }
 
@@ -527,7 +655,7 @@
 								<div class="item features-without-image col-12 col-lg-4 active">
 						<div class="item-wrapper">
 							<div class="img-wrapper">
-								<img src=http://193.108.58.129${item.image.url} alt="${item.title}">
+								<img src=http://193.108.58.129:1337${item.image.url} alt="${item.title}">
 							</div>
 							<div class="card-box">
 							<a href="${item.url}" style="color: black;">

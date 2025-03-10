@@ -339,7 +339,7 @@
     document.addEventListener("DOMContentLoaded", async function () {
         await updateTags('contacts');
         try {
-            const response = await fetch("http://193.108.58.129/api/contact-page?pLevel=5");
+            const response = await fetch("http://193.108.58.129:1337/api/contact-page?pLevel=5");
             const data = await response.json();
             await waitLoading();
 

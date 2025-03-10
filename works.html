@@ -221,7 +221,7 @@
     });
     document.addEventListener("DOMContentLoaded", async function () {
         try {
-            const response = await fetch("http://193.108.58.129/api/types");
+            const response = await fetch("http://193.108.58.129:1337/api/types");
             const data = await response.json();
 
             const works = data.data;
@@ -265,9 +265,9 @@
             });
 
             let type = params.type;
-            let url = "http://193.108.58.129/api/work-results?pLevel=10";
+            let url = "http://193.108.58.129:1337/api/work-results?pLevel=10";
             if (type != null && type !== "all") {
-                url = `http://193.108.58.129/api/work-results?pLevel=10&filters[tag][name]=${type}`;
+                url = `http://193.108.58.129:1337/api/work-results?pLevel=10&filters[tag][name]=${type}`;
             }
             const response = await fetch(url);
             const data = await response.json();
@@ -280,7 +280,7 @@
                         const itemHTML = `
                         <div class="col-12 col-md-6 col-lg-3 item gallery-image">
                         <div class="item-wrapper mb-3 position-relative">
-                        <a href="products?id=${item.documentId}"><img class="w-100" src="http://193.108.58.129${item.images[0].url}"></a>
+                        <a href="products?id=${item.documentId}"><img class="w-100" src="http://193.108.58.129:1337${item.images[0].url}"></a>
                         <div class="tag">
                         <div class="tag-item red">${item.images.length} pics</div>
                         <div class="tag-item">${item.tag.name}</div>
@@ -316,7 +316,7 @@
             imagesContainer.innerHTML = "";
 
             try {
-                const response = await fetch(`http://193.108.58.129/api/products?filters[category][$eq]=${category}`);
+                const response = await fetch(`http://193.108.58.129:1337/api/products?filters[category][$eq]=${category}`);
                 const data = await response.json();
 
                 if (data && data.data) {
@@ -327,7 +327,7 @@
                             const itemHTML = `
                             <div class="col-12 col-md-6 col-lg-3 item gallery-image">
                             <div class="item-wrapper mb-3 position-relative">
-                            <a href="products?id=${item.documentId}"><img class="w-100" src="http://193.108.58.129${item.images[0].url}"></a>
+                            <a href="products?id=${item.documentId}"><img class="w-100" src="http://193.108.58.129:1337${item.images[0].url}"></a>
                             <div class="tag">
                             <div class="tag-item red">${item.images.length} pics</div>
                             <div class="tag-item">${item.tag.name}</div>
