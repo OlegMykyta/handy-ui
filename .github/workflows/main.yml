@@ -1,6 +1,10 @@
 name: Replace URLs and Pack
 
 on:
+  on:
+    push:
+      branches:
+        - master
   workflow_dispatch:
 
 jobs:
