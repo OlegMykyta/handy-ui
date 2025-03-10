@@ -1492,7 +1492,18 @@ a {
 .cid-uE0BAMLEpt {
     padding-top: 2rem;
     padding-bottom: 1rem;
-    background-color: #ffffff;
+    background-color: #edefeb;
+}
+
+.top-cl{
+    background: white;
+    border: 1px solid white;
+    transition: border 0.5s linear;
+}
+
+.top-cl:hover{
+    cursor: pointer;
+    border: 1px solid black;
 }
 
 .cid-uE0BAMLEpt .mbr-fallback-image.disabled {
@@ -5461,7 +5472,7 @@ a {
     font-size: 22px;
     cursor: pointer;
     border-radius: 40px;
-    transition: background-colorease-in-out 0.2s;
+    transition: background-color 0.2s;
 }
 .fixed-button:hover {
     background-color: black;
@@ -5540,4 +5551,17 @@ a {
 
 .bg-mh{
     min-height: 500px;
+}
+
+.img-round{
+    border-radius: 10px;
+}
+
+.portf{
+    border: 1px solid white;
+    transition: border 0.5s linear;
+}
+.portf:hover{
+    cursor: pointer;
+    border: 1px solid black;
 }
