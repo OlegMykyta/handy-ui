@@ -1519,17 +1519,6 @@ a {
     background-color: #edefeb;
 }
 
-.top-cl{
-    background: white;
-    border: 1px solid white;
-    transition: border 0.5s linear;
-}
-
-.top-cl:hover{
-    cursor: pointer;
-    border: 1px solid black;
-}
-
 .cid-uE0BAMLEpt .mbr-fallback-image.disabled {
     display: none;
 }
@@ -5621,6 +5610,15 @@ a {
 }
 
 .item-hov:hover{
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+.top-cl{
+    background: white;
+    transition: transform 0.3s ease;
+}
+
+.top-cl:hover{
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
     transform: scale(1.02);
 }
